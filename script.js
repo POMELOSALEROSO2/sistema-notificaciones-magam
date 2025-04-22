@@ -19,10 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         timeSlotSelect.innerHTML = '<option value="">Selecciona un horario</option>';
         
         if (date) {
-            // Ajustamos la fecha para manejar correctamente la zona horaria
-            const selectedDate = new Date(date);
-            selectedDate.setDate(selectedDate.getDate() + 1); // Compensamos el día
-            const dayName = selectedDate.toLocaleDateString('es-AR', { weekday: 'long' }).toLowerCase();
+            const dayName = new Date(date).toLocaleDateString('es-AR', { weekday: 'long' }).toLowerCase();
             
             if (schedules[dayName]) {
                 schedules[dayName].forEach(time => {
@@ -64,11 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const templateParams = {
             to_email: 'manugentrenamiento@gmail.com',
             student_name: studentName,
-            date: (() => {
-                const emailDate = new Date(date);
-                emailDate.setDate(emailDate.getDate() + 1);
-                return emailDate.toLocaleDateString('es-AR');
-            })(),
+            date: new Date(date).toLocaleDateString('es-AR'),
             time_slot: timeSlot,
             reason: reason || 'No especificado'
         };
@@ -118,9 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function displayNotification(notification) {
         const li = document.createElement('li');
-        const displayDate = new Date(notification.date);
-        displayDate.setDate(displayDate.getDate() + 1);
-        const formattedDate = displayDate.toLocaleDateString('es-AR');
+        const formattedDate = new Date(notification.date).toLocaleDateString('es-AR');
         
         li.innerHTML = `
             <strong>${notification.studentName}</strong> no asistirá a la clase del 
