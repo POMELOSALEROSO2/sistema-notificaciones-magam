@@ -1,6 +1,42 @@
 document.addEventListener('DOMContentLoaded', function() {
     const absenceForm = document.getElementById('absenceForm');
     const notificationList = document.getElementById('notificationList');
+    const timeSlotSelect = document.getElementById('timeSlot');
+    
+    // Horarios por día
+    const schedules = {
+        'Lunes': ['7:30', '9:00', '10:30', '16:00', '17:30', '19:00', '20:30'],
+        'Martes': ['16:00', '17:30', '19:00', '20:30'],
+        'Miércoles': ['7:30', '9:00', '10:30', '16:00', '17:30', '19:00', '20:30'],
+        'Jueves': ['16:00', '17:30', '19:00', '20:30'],
+        'Viernes': ['7:30', '9:00', '10:30', '16:00', '17:30', '19:00', '20:30'],
+        'Sábado': ['9:00', '10:30', '17:30']
+    };
+    
+    // Función para actualizar horarios según el día
+    function updateTimeSlots(date) {
+        // Limpiar opciones actuales
+        timeSlotSelect.innerHTML = '<option value="">Selecciona un horario</option>';
+        
+        if (date) {
+            const dayName = new Date(date).toLocaleDateString('es-AR', { weekday: 'long' });
+            const capitalizedDayName = dayName.charAt(0).toUpperCase() + dayName.slice(1);
+            
+            if (schedules[capitalizedDayName]) {
+                schedules[capitalizedDayName].forEach(time => {
+                    const option = document.createElement('option');
+                    option.value = time;
+                    option.textContent = time;
+                    timeSlotSelect.appendChild(option);
+                });
+            }
+        }
+    }
+
+    // Actualizar horarios cuando cambie la fecha
+    document.getElementById('date').addEventListener('change', function(e) {
+        updateTimeSlots(e.target.value);
+    });
     
     // Cargar notificaciones guardadas
     loadNotifications();

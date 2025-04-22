@@ -73,6 +73,14 @@ textarea {
     resize: vertical;
 }
 
+.help-text {
+    display: block;
+    color: #666;
+    font-size: 0.9em;
+    margin-top: 0.3rem;
+    font-style: italic;
+}
+
 button {
     background-color: var(--secondary-color);
     color: white;
