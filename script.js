@@ -81,7 +81,6 @@ document.addEventListener('DOMContentLoaded', function() {
         li.innerHTML = `
             <strong>${notification.studentName}</strong> no asistirá a la clase del 
             ${formattedDate} a las ${notification.timeSlot}
-            ${notification.reason ? `<br>Motivo: ${notification.reason}` : ''}
         `;
         
         notificationList.insertBefore(li, notificationList.firstChild);
