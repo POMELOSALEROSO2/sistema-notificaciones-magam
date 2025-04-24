@@ -16,7 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
         timeSlotSelect.innerHTML = '<option value="">Selecciona un horario</option>';
         
         if (date) {
-            const dayName = new Date(date).toLocaleDateString('es-AR', { weekday: 'long' }).toLowerCase();
+            const selectedDate = new Date(date + 'T00:00:00');
+            const dayName = selectedDate.toLocaleDateString('es-AR', { weekday: 'long' }).toLowerCase();
+            console.log('Día seleccionado:', dayName, 'Fecha:', selectedDate.toLocaleDateString('es-AR'));
             
             if (schedules[dayName]) {
                 schedules[dayName].forEach(time => {
