@@ -66,7 +66,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const templateParams = {
             to_email: 'manugentrenamiento@gmail.com',
             student_name: studentName,
-            date: new Date(date).toLocaleDateString('es-AR'),
+            date: (() => {
+                const emailDate = new Date(date + 'T00:00:00');
+                return emailDate.toLocaleDateString('es-AR');
+            })(),
             time_slot: timeSlot,
             reason: reason || 'No especificado'
         };
@@ -116,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function displayNotification(notification) {
         const li = document.createElement('li');
-        const formattedDate = new Date(notification.date).toLocaleDateString('es-AR');
+        const formattedDate = new Date(notification.date + 'T00:00:00').toLocaleDateString('es-AR');
         
         li.innerHTML = `
             <strong>${notification.studentName}</strong> no asistirá a la clase del 
@@ -128,6 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Configurar fecha mínima como hoy
     const dateInput = document.getElementById('date');
-    const today = new Date().toISOString().split('T')[0];
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString().split('T')[0];
     dateInput.min = today;
 });
