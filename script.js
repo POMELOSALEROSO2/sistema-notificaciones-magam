@@ -6,11 +6,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Horarios por día
     const schedules = {
         'lunes': ['7:30', '9:00', '10:30', '16:00', '17:30', '19:00', '20:30'],
-        'martes': ['16:00', '17:30', '19:00', '20:30'],
         'miércoles': ['7:30', '9:00', '10:30', '16:00', '17:30', '19:00', '20:30'],
-        'jueves': ['16:00', '17:30', '19:00', '20:30'],
-        'viernes': ['7:30', '9:00', '10:30', '16:00', '17:30', '19:00', '20:30'],
-        'sábado': ['9:00', '10:30', '17:30']
+        'viernes': ['7:30', '9:00', '10:30', '16:00', '17:30', '19:00', '20:30']
     };
     
     // Función para actualizar horarios según el día
@@ -28,6 +25,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     option.textContent = time;
                     timeSlotSelect.appendChild(option);
                 });
+            } else {
+                const option = document.createElement('option');
+                option.value = "";
+                option.textContent = "No hay clases este día";
+                option.disabled = true;
+                timeSlotSelect.appendChild(option);
             }
         }
     }
